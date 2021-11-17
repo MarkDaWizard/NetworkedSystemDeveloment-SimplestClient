@@ -204,7 +204,7 @@ public class NetworkedClient : MonoBehaviour
             else if (signifier == ServerToClientSignifiers.someoneJoinedAsObserver)
             {
                 if (csv.Length > 2)
-                    gameSystemManager.GetComponent<GameSystemManager>().updateChat("Some one has joined as Observer " + csv[2]);
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat("An observer has joined: " + csv[2]);
                 if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
                     gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
                 else

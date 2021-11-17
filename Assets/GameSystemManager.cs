@@ -145,7 +145,7 @@ public class GameSystemManager : MonoBehaviour
     public void updateUserName(string name)
     {
         currentPlayerName = name;
-        playerInfo.GetComponent<Text>().text = "Logged in user: " + name;
+        playerInfo.GetComponent<Text>().text = "Logged in as: " + name;
     }
     public void LoadPlayer(List<string> list)
     {
@@ -164,7 +164,6 @@ public class GameSystemManager : MonoBehaviour
     public void ReplayButtonPressed()
     {
         string msg = ClientToServerSignifiers.ReplayMsg + "," + currentPlayerName;
-        Debug.Log("replay " + msg);
         networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
 
     }
@@ -177,24 +176,19 @@ public class GameSystemManager : MonoBehaviour
     {
         string msg = ClientToServerSignifiers.SendClientMsg + "," + playerDropDownList.GetComponent<Dropdown>().options[playerDropDownList.GetComponent<Dropdown>().value].text.ToString() + "," + messageToClientText.GetComponent<InputField>().text + "," + currentPlayerName;
         networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
-        Debug.Log("client send " + msg);
     }
     public void SendPrefButtonPressed()
     {
         string msg = ClientToServerSignifiers.SendPrefixMsg + "," + messageDropDownList.GetComponent<Dropdown>().options[messageDropDownList.GetComponent<Dropdown>().value].text.ToString() + "," + currentPlayerName;
         networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
-        Debug.Log("sendpre " + msg);
     }
     public void SendButtonPressed()
     {
         string msg = ClientToServerSignifiers.SendMsg + "," + messageText.GetComponent<InputField>().text + "," + currentPlayerName;
-        Debug.Log("msg:" + msg);
         networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
-        Debug.Log("send " + msg);
     }
     public void SubmitButtonPressed()
     {
-        Debug.Log("button");
         string p = passwordText.GetComponent<InputField>().text;
         string n = userIDText.GetComponent<InputField>().text;
         string msg;
