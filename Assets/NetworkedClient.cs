@@ -140,6 +140,44 @@ public class NetworkedClient : MonoBehaviour
             }
             else if (signifier == ServerToClientSignifiers.AccountCreationFailed)
                 Debug.Log("Account creation failed");
+            else if (signifier == ServerToClientSignifiers.JoinedPlay)
+            {
+                //waiting for other player
+                if (csv.Length > 2)
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat("join player " + csv[2]);
+                if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+                else
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
+            }
+            //else if (signifier == ServerToClientSignifiers.JoinedPlayAsOpponent)
+            //{
+            //    //waiting for other player
+            //    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.);
+            //}
+            else if (signifier == ServerToClientSignifiers.GameStart)
+            {
+                Debug.Log("players1: " + csv[1]);
+                Debug.Log("players2: " + csv[2]);
+                Debug.Log("players3: " + csv[3]);
+                //showing list of player
+                //2 opponent player
+                List<string> otherPlayerList = new List<string>();
+                if (csv.Length > 3)
+                {
+                    if (!otherPlayerList.Contains(csv[1]))
+                        otherPlayerList.Add(csv[1]);
+                    if (!otherPlayerList.Contains(csv[2]))
+                        otherPlayerList.Add(csv[2]);
+                    if (!otherPlayerList.Contains(csv[3]))
+                        otherPlayerList.Add(csv[3]);
+                }
+                gameSystemManager.GetComponent<GameSystemManager>().LoadPlayer(otherPlayerList);
+                if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+                else
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
+            }
         }
     }
 

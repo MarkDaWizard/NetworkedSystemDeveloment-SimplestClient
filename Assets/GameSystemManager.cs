@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class GameSystemManager : MonoBehaviour
 {
-    
-    public GameObject networkedClient;
+
     GameObject btnSubmit, txtUserId, txtPwd, chkCreate, btnJoin, lblU, lblP, lblInfo, gameBoard, txtMsg, btnSend, ddlMsg, chatBox, pnlChat, btnSendPrefixMsg, btnJoinObserver, btnReplay, ddlPlayer;
     //,btnPlay
     GameObject txtCMsg, btnCSend, LoginSys, MsgSend, PMsgSend, C2C, JoinSys, txtReplay, pnlReplay;
+    public GameObject networkedClient;
+    string currentPlayerName = "";
+    bool isPlayer = false;
+    List<string> preFixMsg = new List<string> { "hello", "test", "bye", "call you later" };
     //static GameObject instance;
     // Start is called before the first frame update
     void Start()
@@ -122,6 +125,19 @@ public class GameSystemManager : MonoBehaviour
         
     }
 
+    public bool getIsPlayer()
+    {
+        return isPlayer;
+    }
+    public void updateChat(string msg)
+    {
+        chatBox.GetComponent<TMP_Text>().text += msg + "\n";
+    }
+    public void updateUserName(string name)
+    {
+        currentPlayerName = name;
+        lblInfo.GetComponent<Text>().text = "Logged in user: " + name;
+    }
     public void ChangeState(int newState)
     {
         //LoginSys.SetActive(false);
