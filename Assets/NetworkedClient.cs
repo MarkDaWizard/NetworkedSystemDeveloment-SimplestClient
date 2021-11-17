@@ -118,7 +118,28 @@ public class NetworkedClient : MonoBehaviour
         if (csv.Length > 0)
         {
             int signifier = int.Parse(csv[0]);
-            
+            if (signifier == ServerToClientSignifiers.LoginComplete)
+            {
+                Debug.Log("Login successful");
+                if (csv.Length > 1)
+                {
+                    gameSystemManager.GetComponent<GameSystemManager>().updateUserName(csv[1]);
+                }
+                gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.MainMenu);
+            }
+            else if (signifier == ServerToClientSignifiers.LoginFailed)
+                Debug.Log("Login Failed");
+            else if (signifier == ServerToClientSignifiers.AccountCreationComplete)
+            {
+                Debug.Log("account creation successful");
+                if (csv.Length > 1)
+                {
+                    gameSystemManager.GetComponent<GameSystemManager>().updateUserName(csv[1]);
+                }
+                gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.MainMenu);
+            }
+            else if (signifier == ServerToClientSignifiers.AccountCreationFailed)
+                Debug.Log("Account creation failed");
         }
     }
 
