@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 public class GameSystemManager : MonoBehaviour
 {
-
-    GameObject btnSubmit, txtUserId, txtPwd, chkCreate, btnJoin, lblU, lblP, lblInfo, gameBoard, txtMsg, btnSend, ddlMsg, chatBox, pnlChat, btnSendPrefixMsg, btnJoinObserver, btnReplay, ddlPlayer;
+    GameObject submitButton, userIDText, passwordText, accountCreateCheckbox, joinButton, userLabel, passwordLabel, playerInfo, gameBoard, messageText, sendButton, messageDropDownList, chatBox, chatPanel, sendPrefixedMessageButton, observerJoinButton, replayButton, playerDropDownList;
     //,btnPlay
-    GameObject txtCMsg, btnCSend, LoginSys, MsgSend, PMsgSend, C2C, JoinSys, txtReplay, pnlReplay;
+    GameObject messageToClientText, sendToClientButton, loginUIHolder, chatboxUIHolder, prefixedUIHolder, messagingUIHolder, joinUIHolder, replayText, replayPanel;
     public GameObject networkedClient;
     string currentPlayerName = "";
     bool isPlayer = false;
@@ -18,113 +17,119 @@ public class GameSystemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //instance = this.gameObject;
         GameObject[] allobjects = FindObjectsOfType<GameObject>();
-        foreach (GameObject go in allobjects)
+        foreach (GameObject gameObj in allobjects)
         {
-            if (go.name == "btnJoin")
+            if (gameObj.name == "joinButton")
             {
-                btnJoin = go;
+                joinButton = gameObj;
             }
-            else if (go.name == "lblInfo")
+            else if (gameObj.name == "playerInfo")
             {
-                lblInfo = go;
+                playerInfo = gameObj;
             }
-            else if (go.name == "btnLogin")
+            else if (gameObj.name == "submitButton")
             {
-                btnSubmit = go;
+                submitButton = gameObj;
             }
-            else if (go.name == "txtUser")
+            else if (gameObj.name == "userIDText")
             {
-                txtUserId = go;
+                userIDText = gameObj;
             }
-            else if (go.name == "txtPwd")
+            else if (gameObj.name == "passwordText")
             {
-                txtPwd = go;
+                passwordText = gameObj;
             }
-            else if (go.name == "chkCreate")
+            else if (gameObj.name == "accountCreateCheckbox")
             {
-                chkCreate = go;
+                accountCreateCheckbox = gameObj;
             }
-            else if (go.name == "lblUser")
+            else if (gameObj.name == "userLabel")
             {
-                lblU = go;
+                userLabel = gameObj;
             }
-            else if (go.name == "lblPwd")
+            else if (gameObj.name == "passwordLabel")
             {
-                lblP = go;
+                passwordLabel = gameObj;
             }
-            else if (go.name == "btnReplay")
+            else if (gameObj.name == "replayButton")
             {
-                btnReplay = go;
+                replayButton = gameObj;
             }
-            else if (go.name == "txtReplay")
+            else if (gameObj.name == "replayText")
             {
-                txtReplay = go;
+                replayText = gameObj;
             }
-            else if (go.name == "pnlReplay")
+            else if (gameObj.name == "replayPanel")
             {
-                pnlReplay = go;
+                replayPanel = gameObj;
             }
-            //else if (go.name == "gameBoard")
-            //    gameBoard = go;
-            else if (go.name == "txtMsg")
-                txtMsg = go;
-            else if (go.name == "btnSend")
-                btnSend = go;
-            else if (go.name == "ddlMsg")
-                ddlMsg = go;
-            else if (go.name == "chatBox")
-                chatBox = go;
-            else if (go.name == "pnlChat")
-                pnlChat = go;
-            else if (go.name == "btnSendPrefixMsg")
-                btnSendPrefixMsg = go;
-            else if (go.name == "btnJoinObserver")
-                btnJoinObserver = go;
-            else if (go.name == "ddlPlayer")
+            else if (gameObj.name == "messageText")
+                messageText = gameObj;
+            else if (gameObj.name == "sendButton")
+                sendButton = gameObj;
+            else if (gameObj.name == "messageDropDownList")
+                messageDropDownList = gameObj;
+            else if (gameObj.name == "chatBox")
+                chatBox = gameObj;
+            else if (gameObj.name == "chatPanel")
+                chatPanel = gameObj;
+            else if (gameObj.name == "sendPrefixedMessageButton")
+                sendPrefixedMessageButton = gameObj;
+            else if (gameObj.name == "observerJoinButton")
+                observerJoinButton = gameObj;
+            else if (gameObj.name == "playerDropDownList")
             {
-                ddlPlayer = go;
+                playerDropDownList = gameObj;
             }
-            else if (go.name == "PMsgSend")
+            else if (gameObj.name == "prefixedUIHolder")
             {
-                PMsgSend = go;
+                prefixedUIHolder = gameObj;
             }
-            else if (go.name == "JoinSys")
+            else if (gameObj.name == "joinUIHolder")
             {
-                JoinSys = go;
+                joinUIHolder = gameObj;
             }
-            else if (go.name == "C2C")
+            else if (gameObj.name == "messagingUIHolder")
             {
-                C2C = go;
+                messagingUIHolder = gameObj;
             }
-            else if (go.name == "MsgSend")
+            else if (gameObj.name == "chatboxUIHolder")
             {
-                MsgSend = go;
+                chatboxUIHolder = gameObj;
             }
-            else if (go.name == "LoginSys")
+            else if (gameObj.name == "loginUIHolder")
             {
-                LoginSys = go;
+                loginUIHolder = gameObj;
             }
-            else if (go.name == "btnCSend")
+            else if (gameObj.name == "sendToClientButton")
             {
-                btnCSend = go;
+                sendToClientButton = gameObj;
             }
-            else if (go.name == "txtCMsg")
+            else if (gameObj.name == "messageToClientText")
             {
-                txtCMsg = go;
+                messageToClientText = gameObj;
             }
 
 
 
         }
-    }
-   
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        submitButton.GetComponent<Button>().onClick.AddListener(SubmitButtonPressed);
+        joinButton.GetComponent<Button>().onClick.AddListener(JoinButtonPressed);
+        observerJoinButton.GetComponent<Button>().onClick.AddListener(ObserveButtonPressed);
+        replayButton.GetComponent<Button>().onClick.AddListener(ReplayButtonPressed);
+        sendButton.GetComponent<Button>().onClick.AddListener(SendButtonPressed);
+        sendPrefixedMessageButton.GetComponent<Button>().onClick.AddListener(SendPrefButtonPressed);
+        sendToClientButton.GetComponent<Button>().onClick.AddListener(SendClientButtonPressed);
+        accountCreateCheckbox.GetComponent<Toggle>().onValueChanged.AddListener(CreateToggleChanged);
 
+        ChangeState(GameStates.LoginMenu);
+
+        messageDropDownList.GetComponent<Dropdown>().AddOptions(preFixMsg);
+
+
+    }
     public bool getIsPlayer()
     {
         return isPlayer;
@@ -133,110 +138,196 @@ public class GameSystemManager : MonoBehaviour
     {
         chatBox.GetComponent<TMP_Text>().text += msg + "\n";
     }
+    public void updateReplay(string msg)
+    {
+        replayText.GetComponent<TMP_Text>().text += msg + "\n";
+    }
     public void updateUserName(string name)
     {
         currentPlayerName = name;
-        lblInfo.GetComponent<Text>().text = "Logged in user: " + name;
+        playerInfo.GetComponent<Text>().text = "Logged in user: " + name;
+    }
+    public void LoadPlayer(List<string> list)
+    {
+        playerDropDownList.GetComponent<Dropdown>().ClearOptions();
+        foreach (string it in list)
+        {
+            if (it.Contains(currentPlayerName))
+            {
+                list.Remove(it);
+                break;
+            }
+        }
+        playerDropDownList.GetComponent<Dropdown>().AddOptions(list);
+
+    }
+    public void ReplayButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.ReplayMsg + "," + currentPlayerName;
+        Debug.Log("replay " + msg);
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    public void SendClientButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.SendClientMsg + "," + playerDropDownList.GetComponent<Dropdown>().options[playerDropDownList.GetComponent<Dropdown>().value].text.ToString() + "," + messageToClientText.GetComponent<InputField>().text + "," + currentPlayerName;
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+        Debug.Log("client send " + msg);
+    }
+    public void SendPrefButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.SendPrefixMsg + "," + messageDropDownList.GetComponent<Dropdown>().options[messageDropDownList.GetComponent<Dropdown>().value].text.ToString() + "," + currentPlayerName;
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+        Debug.Log("sendpre " + msg);
+    }
+    public void SendButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.SendMsg + "," + messageText.GetComponent<InputField>().text + "," + currentPlayerName;
+        Debug.Log("msg:" + msg);
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+        Debug.Log("send " + msg);
+    }
+    public void SubmitButtonPressed()
+    {
+        Debug.Log("button");
+        string p = passwordText.GetComponent<InputField>().text;
+        string n = userIDText.GetComponent<InputField>().text;
+        string msg;
+        if (accountCreateCheckbox.GetComponent<Toggle>().isOn)
+            msg = ClientToServerSignifiers.CreateAccount + "," + n + "," + p;
+        else
+            msg = ClientToServerSignifiers.Login + "," + n + "," + p;
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+    }
+    public void JoinButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.JoinGammeRoomQueue + "," + currentPlayerName;
+        isPlayer = true;
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+        //  ChangeState(GameStates.TicTacToe);
+    }
+    public void ObserveButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.JoinAsObserver + "," + currentPlayerName;
+        isPlayer = false;
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+        //ChangeState(GameStates.Observer);
+    }
+    public void CreateToggleChanged(bool newValue)
+    {
+
+    }
+    public void PlayButtonPressed()
+    {
+        string msg = ClientToServerSignifiers.PlayGame + "";
+        networkedClient.GetComponent<NetworkedClient>().SendMessageToHost(msg);
+        //load tictactoe
+        ChangeState(GameStates.Running);
     }
     public void ChangeState(int newState)
     {
         //LoginSys.SetActive(false);
         //JoinSys.SetActive(false);
-        btnJoin.SetActive(false);
-        btnJoinObserver.SetActive(false);
-        btnSubmit.SetActive(false);
-        chkCreate.SetActive(false);
-        txtPwd.SetActive(false);
-        txtUserId.SetActive(false);
-        lblU.SetActive(false);
-        lblP.SetActive(false);
+        joinButton.SetActive(false);
+        observerJoinButton.SetActive(false);
+        submitButton.SetActive(false);
+        accountCreateCheckbox.SetActive(false);
+        passwordText.SetActive(false);
+        userIDText.SetActive(false);
+        userLabel.SetActive(false);
+        passwordLabel.SetActive(false);
         //btnPlay.SetActive(false);
         //txtMsg, btnSend, ddlMsg, chatBox, btnSendPrefixMsg
         //MsgSend.SetActive(false);
-        txtMsg.SetActive(false);
-        btnSend.SetActive(false);
+        messageText.SetActive(false);
+        sendButton.SetActive(false);
         //PMsgSend.SetActive(false);
-        ddlMsg.SetActive(false);
-        btnSendPrefixMsg.SetActive(false);
+        messageDropDownList.SetActive(false);
+        sendPrefixedMessageButton.SetActive(false);
         //C2C.SetActive(false);
-        ddlPlayer.SetActive(false);
-        btnCSend.SetActive(false);
-        txtCMsg.SetActive(false);
+        playerDropDownList.SetActive(false);
+        sendToClientButton.SetActive(false);
+        messageToClientText.SetActive(false);
         chatBox.SetActive(false);
-        pnlChat.SetActive(false);
-        txtReplay.SetActive(false);
-        btnReplay.SetActive(false);
-        pnlReplay.SetActive(false);
-        lblInfo.SetActive(false);
+        chatPanel.SetActive(false);
+        replayText.SetActive(false);
+        replayButton.SetActive(false);
+        replayPanel.SetActive(false);
+        playerInfo.SetActive(false);
         if (newState == GameStates.LoginMenu)
         {
             // LoginSys.SetActive(true);
-            btnSubmit.SetActive(true);
-            chkCreate.SetActive(true);
-            txtPwd.SetActive(true);
-            txtUserId.SetActive(true);
-            lblU.SetActive(true);
-            lblP.SetActive(true);
+            submitButton.SetActive(true);
+            accountCreateCheckbox.SetActive(true);
+            passwordText.SetActive(true);
+            userIDText.SetActive(true);
+            userLabel.SetActive(true);
+            passwordLabel.SetActive(true);
         }
         else if (newState == GameStates.MainMenu)
         {
-            lblInfo.SetActive(true);
+            playerInfo.SetActive(true);
             //JoinSys.SetActive(true);
-            btnJoin.SetActive(true);
-            btnJoinObserver.SetActive(true);
+            joinButton.SetActive(true);
+            observerJoinButton.SetActive(true);
             //MsgSend.SetActive(true);
-            txtMsg.SetActive(true);
-            btnSend.SetActive(true);
+            messageText.SetActive(true);
+            sendButton.SetActive(true);
             //PMsgSend.SetActive(true);
-            ddlMsg.SetActive(true);
-            btnSendPrefixMsg.SetActive(true);
+            messageDropDownList.SetActive(true);
+            sendPrefixedMessageButton.SetActive(true);
             //C2C.SetActive(true);
-            ddlPlayer.SetActive(true);
-            btnCSend.SetActive(true);
-            txtCMsg.SetActive(true);
+            playerDropDownList.SetActive(true);
+            sendToClientButton.SetActive(true);
+            messageToClientText.SetActive(true);
             chatBox.SetActive(true);
-            pnlChat.SetActive(true);
+            chatPanel.SetActive(true);
 
-            txtReplay.SetActive(true);
-            btnReplay.SetActive(true);
-            pnlReplay.SetActive(true);
+            replayText.SetActive(true);
+            replayButton.SetActive(true);
+            replayPanel.SetActive(true);
         }
         else if (newState == GameStates.WaitingInQueue)
         {
         }
         else if (newState == GameStates.WaitingForPlayer)
         {
-            lblInfo.GetComponent<Text>().text = "waiting for player";
+            playerInfo.GetComponent<Text>().text = "waiting for player";
         }
         else if (newState == GameStates.TicTacToe)
         {
-            lblInfo.SetActive(true);
+            playerInfo.SetActive(true);
             //btnPlay.SetActive(true);
             //MsgSend.SetActive(true);
-            txtMsg.SetActive(true);
-            btnSend.SetActive(true);
+            messageText.SetActive(true);
+            sendButton.SetActive(true);
             //PMsgSend.SetActive(true);
-            btnSendPrefixMsg.SetActive(true);
-            ddlMsg.SetActive(true);
+            sendPrefixedMessageButton.SetActive(true);
+            messageDropDownList.SetActive(true);
             //C2C.SetActive(true);
-            ddlPlayer.SetActive(true);
-            btnCSend.SetActive(true);
-            txtCMsg.SetActive(true);
+            playerDropDownList.SetActive(true);
+            sendToClientButton.SetActive(true);
+            messageToClientText.SetActive(true);
             chatBox.SetActive(true);
-            pnlChat.SetActive(true);
+            chatPanel.SetActive(true);
 
-            txtReplay.SetActive(true);
-            btnReplay.SetActive(true);
-            pnlReplay.SetActive(true);
+            replayText.SetActive(true);
+            replayButton.SetActive(true);
+            replayPanel.SetActive(true);
         }
         else if (newState == GameStates.Observer)
         {
-            lblInfo.SetActive(true);
+            playerInfo.SetActive(true);
             chatBox.SetActive(true);
-            pnlChat.SetActive(true);
-            txtReplay.SetActive(true);
-            btnReplay.SetActive(true);
-            pnlReplay.SetActive(true);
+            chatPanel.SetActive(true);
+            replayText.SetActive(true);
+            replayButton.SetActive(true);
+            replayPanel.SetActive(true);
         }
     }
 

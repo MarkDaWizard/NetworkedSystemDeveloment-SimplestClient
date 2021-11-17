@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 12914263}
   - component: {fileID: 12914262}
   m_Layer: 5
-  m_Name: btnSend
+  m_Name: sendButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -339,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -577,7 +579,7 @@ GameObject:
   - component: {fileID: 181703384}
   - component: {fileID: 181703383}
   m_Layer: 5
-  m_Name: lblUser
+  m_Name: userlabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1596,7 +1598,7 @@ GameObject:
   - component: {fileID: 536829741}
   - component: {fileID: 536829740}
   m_Layer: 5
-  m_Name: btnCSend
+  m_Name: sendToClientButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1636,6 +1638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1964,7 +1967,7 @@ GameObject:
   - component: {fileID: 705106270}
   - component: {fileID: 705106269}
   m_Layer: 5
-  m_Name: btnLogin
+  m_Name: submitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2004,6 +2007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2082,7 +2086,7 @@ GameObject:
   - component: {fileID: 712228491}
   - component: {fileID: 712228492}
   m_Layer: 5
-  m_Name: chkCreate
+  m_Name: accountCreateCheckbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2123,6 +2127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2169,7 +2174,7 @@ GameObject:
   - component: {fileID: 755960639}
   - component: {fileID: 755960638}
   m_Layer: 5
-  m_Name: btnReplay
+  m_Name: replayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2209,6 +2214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2555,7 +2561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888366133}
   m_Layer: 5
-  m_Name: C2C
+  m_Name: messagingUIHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2593,7 +2599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 889617340}
   m_Layer: 5
-  m_Name: LoginSys
+  m_Name: loginUIHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2751,7 +2757,7 @@ GameObject:
   - component: {fileID: 944578257}
   - component: {fileID: 944578256}
   m_Layer: 5
-  m_Name: lblInfo
+  m_Name: playerInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2831,7 +2837,7 @@ GameObject:
   - component: {fileID: 968112039}
   - component: {fileID: 968112038}
   m_Layer: 5
-  m_Name: btnJoin
+  m_Name: joinButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2871,6 +2877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -3148,7 +3155,7 @@ GameObject:
   - component: {fileID: 1047491986}
   - component: {fileID: 1047491985}
   m_Layer: 5
-  m_Name: lblPwd
+  m_Name: passwordLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3595,7 +3602,7 @@ GameObject:
   - component: {fileID: 1100566548}
   - component: {fileID: 1100566547}
   m_Layer: 5
-  m_Name: txtReplay
+  m_Name: replayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3770,6 +3777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -4045,7 +4053,7 @@ GameObject:
   - component: {fileID: 1228134662}
   - component: {fileID: 1228134661}
   m_Layer: 5
-  m_Name: txtCMsg
+  m_Name: messageToClientText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4086,6 +4094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -4135,6 +4144,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &1228134662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4302,6 +4312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -4816,7 +4827,7 @@ GameObject:
   - component: {fileID: 1474956991}
   - component: {fileID: 1474956990}
   m_Layer: 5
-  m_Name: pnlReplay
+  m_Name: replayPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4893,7 +4904,7 @@ GameObject:
   - component: {fileID: 1492315810}
   - component: {fileID: 1492315809}
   m_Layer: 5
-  m_Name: ddlPlayer
+  m_Name: playerDropDownList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4935,6 +4946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -5060,7 +5072,7 @@ GameObject:
   - component: {fileID: 1525236702}
   - component: {fileID: 1525236701}
   m_Layer: 5
-  m_Name: pnlChat
+  m_Name: chatPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5137,7 +5149,7 @@ GameObject:
   - component: {fileID: 1539209161}
   - component: {fileID: 1539209160}
   m_Layer: 5
-  m_Name: btnJoinObserver
+  m_Name: observerJoinButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5177,6 +5189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -5376,6 +5389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -5422,7 +5436,7 @@ GameObject:
   - component: {fileID: 1562342213}
   - component: {fileID: 1562342212}
   m_Layer: 5
-  m_Name: txtUser
+  m_Name: userIDText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5463,6 +5477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -5512,6 +5527,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &1562342213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5875,7 +5891,7 @@ GameObject:
   - component: {fileID: 1687174453}
   - component: {fileID: 1687174452}
   m_Layer: 5
-  m_Name: btnSendPrefixMsg
+  m_Name: sendPrefixedMessageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5915,6 +5931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -6067,7 +6084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1773254551}
   m_Layer: 5
-  m_Name: PMsgSend
+  m_Name: prefixedUIHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6302,7 +6319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1821877211}
   m_Layer: 5
-  m_Name: joinSys
+  m_Name: joinUIHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6387,6 +6404,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1883193607
 Canvas:
   m_ObjectHideFlags: 0
@@ -6449,7 +6467,7 @@ GameObject:
   - component: {fileID: 1914377620}
   - component: {fileID: 1914377619}
   m_Layer: 5
-  m_Name: txtPwd
+  m_Name: passwordText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6490,6 +6508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -6539,6 +6558,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &1914377620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6827,7 +6847,7 @@ GameObject:
   - component: {fileID: 2009085955}
   - component: {fileID: 2009085954}
   m_Layer: 5
-  m_Name: ddlMsg
+  m_Name: messageDropDownList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6869,6 +6889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -7060,7 +7081,7 @@ GameObject:
   - component: {fileID: 2138855123}
   - component: {fileID: 2138855122}
   m_Layer: 5
-  m_Name: txtMsg
+  m_Name: messageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7101,6 +7122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -7150,6 +7172,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &2138855123
 MonoBehaviour:
   m_ObjectHideFlags: 0

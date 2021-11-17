@@ -1,3 +1,5 @@
+//CLIENT
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -24,18 +26,19 @@ public class NetworkedClient : MonoBehaviour
         GameObject[] allobjects = FindObjectsOfType<GameObject>();
         foreach (GameObject go in allobjects)
         {
-            if (go.GetComponent<GameSystemManager>()!=null)
+            if (go.GetComponent<GameSystemManager>() != null)
             {
                 gameSystemManager = go;
             }
         }
-            Connect();
+        Connect();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        // if(Input.GetKeyDown(KeyCode.S))
+        //   SendMessageToHost("Hello from client");
 
         UpdateNetworkConnection();
     }
@@ -70,7 +73,7 @@ public class NetworkedClient : MonoBehaviour
             }
         }
     }
-    
+
     private void Connect()
     {
 
@@ -98,12 +101,12 @@ public class NetworkedClient : MonoBehaviour
             }
         }
     }
-    
+
     public void Disconnect()
     {
         NetworkTransport.Disconnect(hostID, connectionID, out error);
     }
-    
+
     public void SendMessageToHost(string msg)
     {
         byte[] buffer = Encoding.Unicode.GetBytes(msg);
@@ -173,6 +176,44 @@ public class NetworkedClient : MonoBehaviour
                         otherPlayerList.Add(csv[3]);
                 }
                 gameSystemManager.GetComponent<GameSystemManager>().LoadPlayer(otherPlayerList);
+                if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+                else
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
+            }
+            else if (signifier == ServerToClientSignifiers.ReceiveMsg)
+            {
+                Debug.Log("rece" + csv[2]);
+                if (csv.Length > 3)
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[3] + ":" + csv[2]);
+                if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+                else
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
+            }
+            else if (signifier == ServerToClientSignifiers.ReceiveCMsg)
+            {
+                // Debug.Log("rece" + csv[1]);
+                if (csv.Length > 3)
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[3] + ":" + csv[2]);
+                if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+                else
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
+            }
+            else if (signifier == ServerToClientSignifiers.someoneJoinedAsObserver)
+            {
+                if (csv.Length > 2)
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat("Some one has joined as Observer " + csv[2]);
+                if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+                else
+                    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
+            }
+            else if (signifier == ServerToClientSignifiers.ReplayMsg)
+            {
+                if (csv.Length > 1)
+                    gameSystemManager.GetComponent<GameSystemManager>().updateReplay(csv[1]);
                 if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
                     gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
                 else
