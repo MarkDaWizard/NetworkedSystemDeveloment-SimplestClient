@@ -147,17 +147,12 @@ public class NetworkedClient : MonoBehaviour
             {
                 //waiting for other player
                 if (csv.Length > 2)
-                    gameSystemManager.GetComponent<GameSystemManager>().updateChat("join player " + csv[2]);
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[2] + " has joined!");
                 if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
                     gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
                 else
                     gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.Observer);
             }
-            //else if (signifier == ServerToClientSignifiers.JoinedPlayAsOpponent)
-            //{
-            //    //waiting for other player
-            //    gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.);
-            //}
             else if (signifier == ServerToClientSignifiers.GameStart)
             {
                 Debug.Log("players1: " + csv[1]);
@@ -183,9 +178,8 @@ public class NetworkedClient : MonoBehaviour
             }
             else if (signifier == ServerToClientSignifiers.ReceiveMsg)
             {
-                Debug.Log("rece" + csv[2]);
                 if (csv.Length > 3)
-                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[3] + ":" + csv[2]);
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[3] + ": " + csv[2]);
                 if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
                     gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
                 else
@@ -193,9 +187,8 @@ public class NetworkedClient : MonoBehaviour
             }
             else if (signifier == ServerToClientSignifiers.ReceiveCMsg)
             {
-                // Debug.Log("rece" + csv[1]);
                 if (csv.Length > 3)
-                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[3] + ":" + csv[2]);
+                    gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[3] + ": " + csv[2]);
                 if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
                     gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
                 else

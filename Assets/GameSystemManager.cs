@@ -12,7 +12,7 @@ public class GameSystemManager : MonoBehaviour
     public GameObject networkedClient;
     string currentPlayerName = "";
     bool isPlayer = false;
-    List<string> preFixMsg = new List<string> { "hello", "test", "bye", "call you later" };
+    List<string> preFixMsg = new List<string> { ":)", ":(", "UwU", "<3" };
     //static GameObject instance;
     // Start is called before the first frame update
     void Start()
@@ -255,7 +255,6 @@ public class GameSystemManager : MonoBehaviour
         playerInfo.SetActive(false);
         if (newState == GameStates.LoginMenu)
         {
-            // LoginSys.SetActive(true);
             submitButton.SetActive(true);
             accountCreateCheckbox.SetActive(true);
             passwordText.SetActive(true);
@@ -266,16 +265,12 @@ public class GameSystemManager : MonoBehaviour
         else if (newState == GameStates.MainMenu)
         {
             playerInfo.SetActive(true);
-            //JoinSys.SetActive(true);
             joinButton.SetActive(true);
             observerJoinButton.SetActive(true);
-            //MsgSend.SetActive(true);
             messageText.SetActive(true);
             sendButton.SetActive(true);
-            //PMsgSend.SetActive(true);
             messageDropDownList.SetActive(true);
             sendPrefixedMessageButton.SetActive(true);
-            //C2C.SetActive(true);
             playerDropDownList.SetActive(true);
             sendToClientButton.SetActive(true);
             messageToClientText.SetActive(true);
@@ -296,14 +291,10 @@ public class GameSystemManager : MonoBehaviour
         else if (newState == GameStates.TicTacToe)
         {
             playerInfo.SetActive(true);
-            //btnPlay.SetActive(true);
-            //MsgSend.SetActive(true);
             messageText.SetActive(true);
             sendButton.SetActive(true);
-            //PMsgSend.SetActive(true);
             sendPrefixedMessageButton.SetActive(true);
             messageDropDownList.SetActive(true);
-            //C2C.SetActive(true);
             playerDropDownList.SetActive(true);
             sendToClientButton.SetActive(true);
             messageToClientText.SetActive(true);
