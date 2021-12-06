@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameSystemManager : MonoBehaviour
 {
-    GameObject submitButton, userIDText, passwordText, accountCreateCheckbox, joinButton, userLabel, passwordLabel, playerInfo, gameBoard, messageText, sendButton, messageDropDownList, chatBox, chatPanel, sendPrefixedMessageButton, observerJoinButton, replayButton, playerDropDownList;
+    GameObject chatUI, submitButton, userIDText, passwordText, accountCreateCheckbox, joinButton, userLabel, passwordLabel, playerInfo, gameBoard, messageText, sendButton, messageDropDownList, chatBox, chatPanel, sendPrefixedMessageButton, observerJoinButton, replayButton, playerDropDownList;
     //,btnPlay
     GameObject messageToClientText, sendToClientButton, loginUIHolder, chatboxUIHolder, prefixedUIHolder, messagingUIHolder, joinUIHolder, replayText, replayPanel;
     public GameObject networkedClient;
@@ -111,6 +111,11 @@ public class GameSystemManager : MonoBehaviour
             {
                 messageToClientText = gameObj;
             }
+            else if(gameObj.name == "ChatUIHolder")
+            {
+                chatUI = gameObj;
+            }
+            
 
 
 
@@ -225,94 +230,41 @@ public class GameSystemManager : MonoBehaviour
     }
     public void ChangeState(int newState)
     {
-        //LoginSys.SetActive(false);
-        //JoinSys.SetActive(false);
-        joinButton.SetActive(false);
-        observerJoinButton.SetActive(false);
-        submitButton.SetActive(false);
-        accountCreateCheckbox.SetActive(false);
-        passwordText.SetActive(false);
-        userIDText.SetActive(false);
-        userLabel.SetActive(false);
-        passwordLabel.SetActive(false);
-        //btnPlay.SetActive(false);
-        //txtMsg, btnSend, ddlMsg, chatBox, btnSendPrefixMsg
-        //MsgSend.SetActive(false);
-        messageText.SetActive(false);
-        sendButton.SetActive(false);
-        //PMsgSend.SetActive(false);
-        messageDropDownList.SetActive(false);
-        sendPrefixedMessageButton.SetActive(false);
-        //C2C.SetActive(false);
-        playerDropDownList.SetActive(false);
-        sendToClientButton.SetActive(false);
-        messageToClientText.SetActive(false);
-        chatBox.SetActive(false);
-        chatPanel.SetActive(false);
-        replayText.SetActive(false);
-        replayButton.SetActive(false);
-        replayPanel.SetActive(false);
-        playerInfo.SetActive(false);
+        //Wipe UI
+        loginUIHolder.SetActive(false);
+        chatUI.SetActive(false);
+        //Login
         if (newState == GameStates.LoginMenu)
         {
-            submitButton.SetActive(true);
-            accountCreateCheckbox.SetActive(true);
-            passwordText.SetActive(true);
-            userIDText.SetActive(true);
-            userLabel.SetActive(true);
-            passwordLabel.SetActive(true);
+
+            loginUIHolder.SetActive(true);
         }
+        //MainMenu
         else if (newState == GameStates.MainMenu)
         {
-            playerInfo.SetActive(true);
-            joinButton.SetActive(true);
-            observerJoinButton.SetActive(true);
-            messageText.SetActive(true);
-            sendButton.SetActive(true);
-            messageDropDownList.SetActive(true);
-            sendPrefixedMessageButton.SetActive(true);
-            playerDropDownList.SetActive(true);
-            sendToClientButton.SetActive(true);
-            messageToClientText.SetActive(true);
-            chatBox.SetActive(true);
-            chatPanel.SetActive(true);
 
-            replayText.SetActive(true);
-            replayButton.SetActive(true);
-            replayPanel.SetActive(true);
+
+            chatUI.SetActive(true);
         }
-        else if (newState == GameStates.WaitingInQueue)
-        {
-        }
+        //Waiting
         else if (newState == GameStates.WaitingForPlayer)
         {
-            playerInfo.GetComponent<Text>().text = "waiting for player";
+            playerInfo.GetComponent<Text>().text = "Waiting for players";
         }
+        //Chat
         else if (newState == GameStates.TicTacToe)
         {
-            playerInfo.SetActive(true);
-            messageText.SetActive(true);
-            sendButton.SetActive(true);
-            sendPrefixedMessageButton.SetActive(true);
-            messageDropDownList.SetActive(true);
-            playerDropDownList.SetActive(true);
-            sendToClientButton.SetActive(true);
-            messageToClientText.SetActive(true);
-            chatBox.SetActive(true);
-            chatPanel.SetActive(true);
-
-            replayText.SetActive(true);
-            replayButton.SetActive(true);
-            replayPanel.SetActive(true);
+            chatUI.SetActive(true);
+            joinUIHolder.SetActive(false);
         }
+        //Observer
         else if (newState == GameStates.Observer)
         {
-            playerInfo.SetActive(true);
-            chatBox.SetActive(true);
-            chatPanel.SetActive(true);
-            replayText.SetActive(true);
-            replayButton.SetActive(true);
-            replayPanel.SetActive(true);
+            chatUI.SetActive(true);
+            joinUIHolder.SetActive(false);
+            prefixedUIHolder.SetActive(false);
+            messagingUIHolder.SetActive(false);
+
         }
     }
 

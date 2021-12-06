@@ -24,11 +24,11 @@ public class NetworkedClient : MonoBehaviour
     void Start()
     {
         GameObject[] allobjects = FindObjectsOfType<GameObject>();
-        foreach (GameObject go in allobjects)
+        foreach (GameObject gameObj in allobjects)
         {
-            if (go.GetComponent<GameSystemManager>() != null)
+            if (gameObj.GetComponent<GameSystemManager>() != null)
             {
-                gameSystemManager = go;
+                gameSystemManager = gameObj;
             }
         }
         Connect();
@@ -37,9 +37,6 @@ public class NetworkedClient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if(Input.GetKeyDown(KeyCode.S))
-        //   SendMessageToHost("Hello from client");
-
         UpdateNetworkConnection();
     }
 
@@ -58,17 +55,14 @@ public class NetworkedClient : MonoBehaviour
             switch (recNetworkEvent)
             {
                 case NetworkEventType.ConnectEvent:
-                    Debug.Log("connected.  " + recConnectionID);
                     ourClientID = recConnectionID;
                     break;
                 case NetworkEventType.DataEvent:
                     string msg = Encoding.Unicode.GetString(recBuffer, 0, dataSize);
                     ProcessRecievedMsg(msg, recConnectionID);
-                    Debug.Log("got msg = " + msg);
                     break;
                 case NetworkEventType.DisconnectEvent:
                     isConnected = false;
-                    Debug.Log("disconnected.  " + recConnectionID);
                     break;
             }
         }
@@ -107,16 +101,16 @@ public class NetworkedClient : MonoBehaviour
         NetworkTransport.Disconnect(hostID, connectionID, out error);
     }
 
-    public void SendMessageToHost(string msg)
+    public void SendMessageToHost(string message)
     {
-        byte[] buffer = Encoding.Unicode.GetBytes(msg);
-        NetworkTransport.Send(hostID, connectionID, reliableChannelID, buffer, msg.Length * sizeof(char), out error);
+        byte[] buffer = Encoding.Unicode.GetBytes(message);
+        NetworkTransport.Send(hostID, connectionID, reliableChannelID, buffer, message.Length * sizeof(char), out error);
     }
 
     private void ProcessRecievedMsg(string msg, int id)
     {
-        Debug.Log("msg recieved = " + msg + ".  connection id = " + id);
-        //chk message 
+        Debug.Log("message recieved = " + msg + ".  connection id = " + id);
+        //Check message 
         string[] csv = msg.Split(',');
         if (csv.Length > 0)
         {
@@ -134,7 +128,7 @@ public class NetworkedClient : MonoBehaviour
                 Debug.Log("Login Failed");
             else if (signifier == ServerToClientSignifiers.AccountCreationComplete)
             {
-                Debug.Log("account creation successful");
+                Debug.Log("Account Created");
                 if (csv.Length > 1)
                 {
                     gameSystemManager.GetComponent<GameSystemManager>().updateUserName(csv[1]);
@@ -145,7 +139,6 @@ public class NetworkedClient : MonoBehaviour
                 Debug.Log("Account creation failed");
             else if (signifier == ServerToClientSignifiers.JoinedPlay)
             {
-                //waiting for other player
                 if (csv.Length > 2)
                     gameSystemManager.GetComponent<GameSystemManager>().updateChat(csv[2] + " has joined!");
                 if (gameSystemManager.GetComponent<GameSystemManager>().getIsPlayer())
@@ -155,11 +148,6 @@ public class NetworkedClient : MonoBehaviour
             }
             else if (signifier == ServerToClientSignifiers.GameStart)
             {
-                Debug.Log("players1: " + csv[1]);
-                Debug.Log("players2: " + csv[2]);
-                Debug.Log("players3: " + csv[3]);
-                //showing list of player
-                //2 opponent player
                 List<string> otherPlayerList = new List<string>();
                 if (csv.Length > 3)
                 {
