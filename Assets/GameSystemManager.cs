@@ -116,9 +116,6 @@ public class GameSystemManager : MonoBehaviour
                 chatUI = gameObj;
             }
             
-
-
-
         }
         submitButton.GetComponent<Button>().onClick.AddListener(SubmitButtonPressed);
         joinButton.GetComponent<Button>().onClick.AddListener(JoinButtonPressed);
