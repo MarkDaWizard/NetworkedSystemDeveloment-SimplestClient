@@ -114,7 +114,7 @@ public class TicTacToeManager : MonoBehaviour
         {
             //win
             OnGameOver("You Won!");
-            connectionToHost.SendMessageToHost(ClientToServerSignifiers.EndingTheGame + "," + "Game over, you lost");
+            connectionToHost.SendMessageToHost(ClientToServerSignifiers.EndingTheGame + "," + "You Lost");
         }
         
     }
@@ -130,7 +130,7 @@ public class TicTacToeManager : MonoBehaviour
         if(!isObserver)
         { 
             isPlayersTurn = true;
-            turnIndicatorText.GetComponent<Text>().text = "It's your turn";
+            turnIndicatorText.GetComponent<Text>().text = "Your turn";
         }
         else
         {
@@ -143,7 +143,7 @@ public class TicTacToeManager : MonoBehaviour
         turnIndicatorText.GetComponent<Text>().text = endingMsg;
 
         if(isObserver)
-            turnIndicatorText.GetComponent<Text>().text = "the game has ended";
+            turnIndicatorText.GetComponent<Text>().text = "Game Over";
         //enable ui for replay
         ChangeState(TicTacToeStates.GameOver);
     }
@@ -202,7 +202,7 @@ public class TicTacToeManager : MonoBehaviour
     public void ChosenAsPlayerOne()
     {
         isPlayersTurn = true;
-        turnIndicatorText.GetComponent<Text>().text = "It's your turn";
+        turnIndicatorText.GetComponent<Text>().text = "Your turn";
         wasPlayerOne = true;
     }
 
@@ -218,15 +218,15 @@ public class TicTacToeManager : MonoBehaviour
 
         if(takenTileCount >= 9 && isGameOver == false)
         {
-            connectionToHost.SendMessageToHost(ClientToServerSignifiers.EndingTheGame + "," + "No Squares Left. You tied");
-            OnGameOver("No squares left. You tied");
+            connectionToHost.SendMessageToHost(ClientToServerSignifiers.EndingTheGame + "," + " Draw!");
+            OnGameOver("Game Over. Draw!");
         }
     }
 
     public void SetRoomNumberText(string roomNumber)
     {
         this.roomNumber = int.Parse(roomNumber);
-        roomNumberText.GetComponent<Text>().text = "Room: " + roomNumber;
+        roomNumberText.GetComponent<Text>().text = "Room number: " + roomNumber;
     }
 
     public void EnterGameAsObserver(string[] csv_TurnsSoFar)
@@ -306,7 +306,7 @@ public class TicTacToeManager : MonoBehaviour
             opponentSymbolText.SetActive(false);
             characterSelectionPanel.SetActive(false);
 
-            playerSymbolText.GetComponent<Text>().text = "You Are: Observing";
+            playerSymbolText.GetComponent<Text>().text = "You are an observer";
 
             isObserver = true;
         }
