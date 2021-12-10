@@ -40,10 +40,10 @@ public class ChatBoxBehaviour : MonoBehaviour
 
     void SendChatMessageToServer(string msg)
     {
-        connectionToClient.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.ChatLogMessage + "," + msg);
+        connectionToClient.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.ChatMessage + "," + msg);
     }
 
-    public void OnPrefabMessagePressed(string msg)
+    public void OnPrefixMessagePressed(string msg)
     {
         AddChatMessage(msg, true);
         SendChatMessageToServer(msg);

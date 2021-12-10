@@ -107,10 +107,10 @@ public class GameSystemManager : MonoBehaviour
 
     void LeaveRoomButtonPressed()
     {
-        if(ticTacToeWindow.activeInHierarchy && ticTacToeWindow.GetComponent<TicTacToeManager>().IsSafeToLeaveTheRoom() == false)
-            ConnectionToHost.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.EndingTheGame + "," + "Opponent Left Early");
+        if(ticTacToeWindow.activeInHierarchy && ticTacToeWindow.GetComponent<TicTacToeManager>().IsOKToLeave() == false)
+            ConnectionToHost.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.EndGame + "," + "Opponent Left Early");
         
-        ConnectionToHost.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.LeaveTheRoom + "");
+        ConnectionToHost.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.LeavingRoom + "");
         ChangeState(GameStates.MainMenu);
     }
 

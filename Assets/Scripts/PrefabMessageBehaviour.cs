@@ -18,7 +18,7 @@ public class PrefabMessageBehaviour : MonoBehaviour
         if(chatlog != null)
         { 
             string text  = GetComponentInChildren<Text>().text;
-            chatlog.OnPrefabMessagePressed(text);
+            chatlog.OnPrefixMessagePressed(text);
         }
     }
 }
