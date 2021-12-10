@@ -29,8 +29,8 @@ public class GameSystemManager : MonoBehaviour
                 gameRoomButton = go;
             else if(go.name == "NetworkClient")
                 ConnectionToHost = go;
-            else if(go.name == "Panel Title")
-                titleText = go;
+            //else if(go.name == "Panel Title")
+            //    titleText = go;
             else if(go.name == "TicTacToe Window")
                 ticTacToeWindow = go;
             else if(go.name == "Log In Window")
@@ -76,10 +76,10 @@ public class GameSystemManager : MonoBehaviour
     public void NewUserTogglePressed(bool newValue)
     {
         isNewUser = newValue;
-        if(isNewUser)
-            titleText.GetComponent<Text>().text = "Create Account";
-        else
-             titleText.GetComponent<Text>().text = "Login";
+        //if (isNewUser)
+        //    titleText.GetComponent<Text>().text = "Create Account";
+        //else
+        //    titleText.GetComponent<Text>().text = "Login";
     }
 
     private void GameRoomButtonPressed()
@@ -121,7 +121,7 @@ public class GameSystemManager : MonoBehaviour
         submitButton.SetActive(false);
         toggle.SetActive(false);
         gameRoomButton.SetActive(false);
-        titleText.SetActive(false);
+        //titleText.SetActive(false);
         observerButton.SetActive(false);
         roomNumInput.SetActive(false);
         leaveRoomButton.SetActive(false);
@@ -136,7 +136,7 @@ public class GameSystemManager : MonoBehaviour
             userNameInput.SetActive(true);
             passwordInput.SetActive(true);
             toggle.SetActive(true);
-            titleText.SetActive(true);
+            //titleText.SetActive(true);
         }
         else if(state == GameStates.MainMenu)
         {

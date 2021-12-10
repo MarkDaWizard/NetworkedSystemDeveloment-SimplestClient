@@ -30,6 +30,7 @@ public class ChatBoxBehaviour : MonoBehaviour
         if(fromPlayer)
         {
             textLines[0].alignment = TextAnchor.MiddleRight;
+            
         }
         else
         {

@@ -6,7 +6,7 @@ using System;
 
 public class TicTacToeManager : MonoBehaviour
 {
-    GameObject playerSymbolText,opponentSymbolText, turnIndicatorText, characterSelectionPanel, xButton, oButton, roomNumberText, previousButton, nextButton;
+    GameObject playerSymbolText, turnIndicatorText, characterSelectionPanel, xButton, oButton, roomNumberText, previousButton, nextButton;
 
     NetworkedClient connectionToHost;
     
@@ -47,8 +47,6 @@ public class TicTacToeManager : MonoBehaviour
         {
             if(go.name == "PlayerSymbolText")
                 playerSymbolText = go;
-            else if(go.name == "OpponentSymbolText")
-                opponentSymbolText = go;
             else if(go.name == "TurnIndicatorText")
                 turnIndicatorText = go;
             else if(go.name == "CharacterSelection")
@@ -186,7 +184,6 @@ public class TicTacToeManager : MonoBehaviour
         opponentIcon = otherSymbol;
 
         playerSymbolText.GetComponent<Text>().text = "You Are: " + symbol;
-        opponentSymbolText.GetComponent<Text>().text = "Opponent is: " + otherSymbol;
 
         characterSelectionPanel.SetActive(false);
         turnIndicatorText.SetActive(true);
@@ -271,7 +268,7 @@ public class TicTacToeManager : MonoBehaviour
     private void ResetGameState()
     {
         playerSymbolText.GetComponent<Text>().text = "You Are: " ;
-        opponentSymbolText.GetComponent<Text>().text = "Opponent is: " ;
+        //opponentSymbolText.GetComponent<Text>().text = "Opponent is: " ;
 
         foreach (TicTacToeSquareBehaviour s in ticTacToeSquares)
         {
@@ -293,7 +290,7 @@ public class TicTacToeManager : MonoBehaviour
             ResetGameState();
            
             isGameOver = false;
-            opponentSymbolText.SetActive(true);
+            
             characterSelectionPanel.SetActive(true);
 
             isObserver = false;
@@ -303,7 +300,6 @@ public class TicTacToeManager : MonoBehaviour
             ResetGameState();
             playerIcon = "X";
             opponentIcon = "O";
-            opponentSymbolText.SetActive(false);
             characterSelectionPanel.SetActive(false);
 
             playerSymbolText.GetComponent<Text>().text = "You are an observer";
