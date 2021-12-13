@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 1216601303477681260}
   - component: {fileID: 1216601303477681262}
   m_Layer: 0
-  m_Name: ChatBoxPrefab
+  m_Name: MessageBoxPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

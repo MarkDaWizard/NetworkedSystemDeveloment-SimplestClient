@@ -1,25 +1,33 @@
-using System.Collections;
+//Phu Pham
+//101250748
+//
+//T163 - Game Programming
+//GAME3110
+
+
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ChatBoxBehaviour : MonoBehaviour
+//Script for behaviour of the chat box
+public class MessageBoxScript : MonoBehaviour
 {
   [SerializeField]
   List<Text> textLines;
 
     public GameObject inputField, sendButton, connectionToClient;
 
-    List<Button> prefabMessages;
+   // List<Button> prefabMessages;
 
     private void Start()
     {
-        sendButton.GetComponent<Button>().onClick.AddListener(OnSendButtonPressed);
+        sendButton.GetComponent<Button>().onClick.AddListener(OnSendButtonClicked);
     }
 
+    //Add a message onto the text boxes
     public void AddChatMessage(string msg, bool fromPlayer)
     {
-        //start at the top and copy the text box below itself
+        //Add the new message, copy current one onto the box above
         for(int i = textLines.Count -1; i > 0; i--)
         {
             textLines[i].text = textLines[i-1].text;
@@ -27,6 +35,7 @@ public class ChatBoxBehaviour : MonoBehaviour
         }
         textLines[0].text = msg;
 
+        //Set alignment of text to differentiate sender/receiver
         if(fromPlayer)
         {
             textLines[0].alignment = TextAnchor.MiddleRight;
@@ -38,18 +47,20 @@ public class ChatBoxBehaviour : MonoBehaviour
         }
     }
 
+    //Send the message to the server
     void SendChatMessageToServer(string msg)
     {
         connectionToClient.GetComponent<NetworkedClient>().SendMessageToHost(ClientToServerSignifiers.ChatMessage + "," + msg);
     }
 
+    //Send prefix message to server
     public void OnPrefixMessagePressed(string msg)
     {
         AddChatMessage(msg, true);
         SendChatMessageToServer(msg);
     }
-
-    void OnSendButtonPressed()
+    //Send button clicked
+    void OnSendButtonClicked()
     {
         InputField input = inputField.GetComponent<InputField>();
         string msg = input.textComponent.text;
@@ -61,7 +72,7 @@ public class ChatBoxBehaviour : MonoBehaviour
         AddChatMessage(msg, true);
         SendChatMessageToServer(msg);
     }
-
+    //Clear messages
     void ClearAllMessages()
     {
         foreach(Text t in textLines)
@@ -70,7 +81,7 @@ public class ChatBoxBehaviour : MonoBehaviour
         }
     }
 
-
+    //Clear all messages when message box is inactive
     private void OnDisable()
     {
         if(textLines != null)

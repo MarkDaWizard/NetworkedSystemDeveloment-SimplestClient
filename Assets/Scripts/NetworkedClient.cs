@@ -1,3 +1,13 @@
+//Phu Pham
+//101250748
+//
+//T163 - Game Programming
+//GAME3110
+
+
+
+
+
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -26,11 +36,11 @@ public class NetworkedClient : MonoBehaviour
 
         foreach(GameObject gameObj in allObjects)
         {
-            if(gameObj.GetComponent<GameSystemManager>() != null)
+            if(gameObj.GetComponent<SystemManager>() != null)
                 gameSystemManager = gameObj;
-            if(gameObj.GetComponent<TicTacToeManager>() != null)
+            if(gameObj.GetComponent<TTTGameManager>() != null)
                 ticTacToeManager = gameObj;
-            if(gameObj.GetComponent<ChatBoxBehaviour>() != null)
+            if(gameObj.GetComponent<MessageBoxScript>() != null)
                 chatBox = gameObj;
         }
 
@@ -125,41 +135,41 @@ public class NetworkedClient : MonoBehaviour
         //Account creation
         if(signifier == ServerToClientSignifiers.AccountCreated || signifier == ServerToClientSignifiers.LoginComplete)
         {
-            gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.MainMenu);
+            gameSystemManager.GetComponent<SystemManager>().ChangeState(GameStates.MainMenu);
         }
         //Game starts
         else if(signifier == ServerToClientSignifiers.GameStart)
         {
-            gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
-            ticTacToeManager.GetComponent<TicTacToeManager>().ChangeState(TicTacToeStates.StartingGame);
-            ticTacToeManager.GetComponent<TicTacToeManager>().SetRoomNumberText(csv[1]);
+            gameSystemManager.GetComponent<SystemManager>().ChangeState(GameStates.TicTacToe);
+            ticTacToeManager.GetComponent<TTTGameManager>().ChangeState(TicTacToeStates.StartingGame);
+            ticTacToeManager.GetComponent<TTTGameManager>().SetRoomNumberText(csv[1]);
         }
         //Check if player is going first
         else if(signifier == ServerToClientSignifiers.ChosenAsPlayerOne)
         {
-            ticTacToeManager.GetComponent<TicTacToeManager>().IsPlayerOne();
+            ticTacToeManager.GetComponent<TTTGameManager>().IsPlayerOne();
         }
         //Opponent makes a move
         else if(signifier == ServerToClientSignifiers.OpponentAction)
         {
-            ticTacToeManager.GetComponent<TicTacToeManager>().OpponentMadeMove(int.Parse(csv[1]));
+            ticTacToeManager.GetComponent<TTTGameManager>().OpponentMadeMove(int.Parse(csv[1]));
         }
         //Game ended
         else if(signifier == ServerToClientSignifiers.GameOver)
         {
-            ticTacToeManager.GetComponent<TicTacToeManager>().OnGameOver(csv[1]);
+            ticTacToeManager.GetComponent<TTTGameManager>().OnGameOver(csv[1]);
         }
         //Message handling
         else if(signifier == ServerToClientSignifiers.ChatLogMessage)
         {
-            chatBox.GetComponent<ChatBoxBehaviour>().AddChatMessage(csv[1], false);
+            chatBox.GetComponent<MessageBoxScript>().AddChatMessage(csv[1], false);
         }
         //Join room as observer
         else if(signifier == ServerToClientSignifiers.EnteredGameRoomAsObserver)
         { 
             //Get data of previous turns
-            TicTacToeManager ticTackToe =  ticTacToeManager.GetComponent<TicTacToeManager>();
-            gameSystemManager.GetComponent<GameSystemManager>().ChangeState(GameStates.TicTacToe);
+            TTTGameManager ticTackToe =  ticTacToeManager.GetComponent<TTTGameManager>();
+            gameSystemManager.GetComponent<SystemManager>().ChangeState(GameStates.TicTacToe);
             ticTackToe.SetRoomNumberText(csv[1]);
 
             string[] takenSquares = new string[csv.Length - 2];
@@ -180,7 +190,7 @@ public class NetworkedClient : MonoBehaviour
             {
                 turns[i - 1] = csv[i];
             }
-            ticTacToeManager.GetComponent<TicTacToeManager>().SetTurnData(turns);
+            ticTacToeManager.GetComponent<TTTGameManager>().SetTurnData(turns);
         }
     }
 
@@ -198,17 +208,12 @@ public static class ClientToServerSignifiers
     public const int CreateAccount = 1;
     public const int Login = 2;
     public const int JoinGameRoomQueue = 3;
-
     public const int TTTSquareChosen = 4;
-
     public const int ChatMessage = 8;
-
     public const int JoinAnyRoomAsObserver = 9;
     public const int JoinSpecificRoomAsObserver = 10;
-
     public const int EndGame = 11;
     public const int LeavingRoom = 12;
-
     public const int RequestTurnData = 14;
 }
 
@@ -216,21 +221,14 @@ public static class ServerToClientSignifiers
 {
     public const int LoginComplete = 1;
     public const int LoginFailed = 2;
-
     public const int AccountCreated = 3;
     public const int AccountCreationFailed = 4;
-
     public const int GameStart = 5;
-
     public const int ChosenAsPlayerOne = 6;
     public const int OpponentAction = 7;
-
     public const int ChatLogMessage = 11;
-
     public const int EnteredGameRoomAsObserver = 12;
-
     public const int GameOver = 13;
-
     public const int TurnData = 14;
 }
 

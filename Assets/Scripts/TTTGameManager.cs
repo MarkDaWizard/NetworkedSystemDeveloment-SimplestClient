@@ -1,21 +1,23 @@
+//Phu Pham
+//101250748
+//
+//T163 - Game Programming
+//GAME3110
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TicTacToeManager : MonoBehaviour
+public class TTTGameManager : MonoBehaviour
 {
-    GameObject playerSymbolText, turnIndicatorText, characterSelectionPanel, xButton, oButton, roomNumberText, previousButton, nextButton;
+    GameObject playerSymbolText, turnIndicatorText, SymbolSelectUI, xButton, oButton, roomNumberText, previousButton, nextButton;
 
     NetworkedClient connectionToHost;
     
-    List<TicTacToeSquareBehaviour> ticTacToeSquares;
+    List<TTTSquareScript> TTTSquares;
 
     string playerSymbol, opponentSymbol;
 
-    bool isPlayersTurn = false;
-    bool isGameOver = false;
-    bool isObserver = false;
-    bool wasPlayerOne = false;
+    bool isPlayersTurn = false, isGameOver = false, isObserver = false, wasPlayerOne = false;
     int roomNumber;
 
     string[] turns;
@@ -30,27 +32,27 @@ public class TicTacToeManager : MonoBehaviour
         turnCount = data.Length;
     }
 
-
+    //Set gameobject to corresponding variables
     void Awake()
     {
-        ticTacToeSquares = new List<TicTacToeSquareBehaviour>(GetComponentsInChildren<TicTacToeSquareBehaviour>());
+        TTTSquares = new List<TTTSquareScript>(GetComponentsInChildren<TTTSquareScript>());
 
-        foreach(TicTacToeSquareBehaviour square in ticTacToeSquares)
+        foreach(TTTSquareScript square in TTTSquares)
         {
             square.OnSquarePressed += OnTTTSquareClicked;
         }
-        //Set gameobject to corresponding variables
+        
         foreach(GameObject gameObj in FindObjectsOfType<GameObject>())
         {
             if(gameObj.name == "PlayerSymbolText")
                 playerSymbolText = gameObj;
             else if(gameObj.name == "TurnIndicatorText")
                 turnIndicatorText = gameObj;
-            else if(gameObj.name == "CharacterSelection")
-                characterSelectionPanel = gameObj;
-            else if(gameObj.name == "X Button")
+            else if(gameObj.name == "SymbolSelectUI")
+                SymbolSelectUI = gameObj;
+            else if(gameObj.name == "XButton")
                 xButton = gameObj;
-            else if(gameObj.name == "O Button")
+            else if(gameObj.name == "OButton")
                 oButton = gameObj;
             else if(gameObj.name == "RoomNumberText")
                 roomNumberText = gameObj;
@@ -60,7 +62,7 @@ public class TicTacToeManager : MonoBehaviour
                 nextButton = gameObj;
 
         }
-
+        //Add listener for button presses
         xButton.GetComponent<Button>().onClick.AddListener(XButtonPressed);
         oButton.GetComponent<Button>().onClick.AddListener(OButtonPressed);
         nextButton.GetComponent<Button>().onClick.AddListener(NextButtonPressed);
@@ -68,7 +70,7 @@ public class TicTacToeManager : MonoBehaviour
     }
 
     //Player presses a square
-    private void OnTTTSquareClicked(TicTacToeSquareBehaviour square)
+    private void OnTTTSquareClicked(TTTSquareScript square)
     {
         //Check if player has selected a symbol and if it's their turn or not
         if(playerSymbol == "" || !isPlayersTurn) 
@@ -91,7 +93,7 @@ public class TicTacToeManager : MonoBehaviour
         int rowCount, colCount, diagonal1Count, diagonal2Count;
         rowCount = colCount = diagonal1Count = diagonal2Count = 0;
         //Check each square in TTT
-        foreach(TicTacToeSquareBehaviour square in ticTacToeSquares)
+        foreach(TTTSquareScript square in TTTSquares)
         {
             if(square.isSquareTaken == false || square.icon == opponentSymbol)
                 continue;
@@ -120,7 +122,7 @@ public class TicTacToeManager : MonoBehaviour
     private void DrawCheck()
     {
         int takenTileCount = 0;
-        foreach (TicTacToeSquareBehaviour s in ticTacToeSquares)
+        foreach (TTTSquareScript s in TTTSquares)
         {
             if (s.isSquareTaken)
                 takenTileCount++;
@@ -137,7 +139,7 @@ public class TicTacToeManager : MonoBehaviour
     public void OpponentMadeMove(int squareID)
     {
         //Claim the square that was clicked
-        foreach(TicTacToeSquareBehaviour square in ticTacToeSquares)
+        foreach(TTTSquareScript square in TTTSquares)
         {
             if(square.ID == squareID)
                 square.ClaimSquare(opponentSymbol);
@@ -196,7 +198,7 @@ public class TicTacToeManager : MonoBehaviour
         if(turnCount > 0)
         {
             turnCount--;
-            ticTacToeSquares[int.Parse(turns[turnCount])].ResetSquare();
+            TTTSquares[int.Parse(turns[turnCount])].ResetSquare();
         }
     }
 
@@ -208,11 +210,11 @@ public class TicTacToeManager : MonoBehaviour
 
         playerSymbolText.GetComponent<Text>().text = "You Are: " + symbol1;
 
-        characterSelectionPanel.SetActive(false);
+        SymbolSelectUI.SetActive(false);
         turnIndicatorText.SetActive(true);
 
         //Check if opponent made a move before player chose a symbol
-        foreach(TicTacToeSquareBehaviour square in ticTacToeSquares)
+        foreach(TTTSquareScript square in TTTSquares)
         {
             if(square.isSquareTaken)
                 square.ClaimSquare(opponentSymbol);
@@ -256,16 +258,16 @@ public class TicTacToeManager : MonoBehaviour
         if(wasPlayerOne)
         {
             if (turnCount++ % 2 == 0)
-                ticTacToeSquares[squareID].ClaimSquare(playerSymbol);
+                TTTSquares[squareID].ClaimSquare(playerSymbol);
             else
-                ticTacToeSquares[squareID].ClaimSquare(opponentSymbol);
+                TTTSquares[squareID].ClaimSquare(opponentSymbol);
         }
         else
         {
             if (turnCount++ % 2 == 1)
-                ticTacToeSquares[squareID].ClaimSquare(playerSymbol);
+                TTTSquares[squareID].ClaimSquare(playerSymbol);
             else
-                ticTacToeSquares[squareID].ClaimSquare(opponentSymbol);
+                TTTSquares[squareID].ClaimSquare(opponentSymbol);
         }
     }
 
@@ -280,12 +282,12 @@ public class TicTacToeManager : MonoBehaviour
     {
         playerSymbolText.GetComponent<Text>().text = "You Are: " ;
         //Clear up all squares
-        foreach (TicTacToeSquareBehaviour square in ticTacToeSquares)
+        foreach (TTTSquareScript square in TTTSquares)
         {
             square.ResetSquare();
         }
         //Reset turn indicator & turn counter
-        turnIndicatorText.GetComponent<Text>().text = "It's your opponent's turn";
+        turnIndicatorText.GetComponent<Text>().text = "Opponent's turn";
         turnIndicatorText.SetActive(false);
         turnCount = 0;
     }
@@ -303,7 +305,7 @@ public class TicTacToeManager : MonoBehaviour
            
             isGameOver = false;
             
-            characterSelectionPanel.SetActive(true);
+            SymbolSelectUI.SetActive(true);
 
             isObserver = false;
         }
@@ -313,7 +315,7 @@ public class TicTacToeManager : MonoBehaviour
             ResetGameState();
             playerSymbol = "X";
             opponentSymbol = "O";
-            characterSelectionPanel.SetActive(false);
+            SymbolSelectUI.SetActive(false);
 
             playerSymbolText.GetComponent<Text>().text = "You are an observer";
 
