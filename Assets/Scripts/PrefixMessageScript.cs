@@ -5,23 +5,24 @@
 //GAME3110
 using UnityEngine;
 using UnityEngine.UI;
+
 //Script for sending prefix messages
 public class PrefixMessageScript : MonoBehaviour
 {
     
-    MessageBoxScript chatlog;
+    MessageBoxScript messageBox;
     private void Start()
     {
-        chatlog = GetComponentInParent<MessageBoxScript>();
+        messageBox = GetComponentInParent<MessageBoxScript>();
         GetComponent<Button>().onClick.AddListener(SendMessageToChat);
     }
 
     void SendMessageToChat()
     {
-        if(chatlog != null)
+        if(messageBox != null)
         { 
             string text  = GetComponentInChildren<Text>().text;
-            chatlog.OnPrefixMessagePressed(text);
+            messageBox.OnPrefixMessagePressed(text);
         }
     }
 }

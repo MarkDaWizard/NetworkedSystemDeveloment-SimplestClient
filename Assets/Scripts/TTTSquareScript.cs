@@ -10,12 +10,9 @@ using UnityEngine.UI;
 public class TTTSquareScript : MonoBehaviour
 {
     public int row, column, ID;
-
     public bool diagonal1, diagonal2, isSquareTaken;
     public string icon;
-
     private const int maxColumns = 3;
-
     public delegate void SquarePressedDelegate(TTTSquareScript squarePressed);
     public event SquarePressedDelegate OnSquarePressed;
 

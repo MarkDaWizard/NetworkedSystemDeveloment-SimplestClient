@@ -138,7 +138,6 @@ public class SystemManager : MonoBehaviour
             UsernameInputfield.SetActive(true);
             PasswordInputfield.SetActive(true);
             SignupToggle.SetActive(true);
-
         }
         //Join Room menu
         else if(state == GameStates.MainMenu)

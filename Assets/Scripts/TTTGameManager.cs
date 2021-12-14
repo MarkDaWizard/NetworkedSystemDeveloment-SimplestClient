@@ -9,21 +9,15 @@ using UnityEngine.UI;
 
 public class TTTGameManager : MonoBehaviour
 {
-    GameObject playerSymbolText, turnIndicatorText, SymbolSelectUI, xButton, oButton, roomNumberText, previousButton, nextButton;
-
     NetworkedClient connectionToHost;
-    
     List<TTTSquareScript> TTTSquares;
+    GameObject playerSymbolText, turnIndicatorText, SymbolSelectUI, xButton, oButton, roomNumberText, previousButton, nextButton;
 
     string playerSymbol, opponentSymbol;
 
     bool isPlayersTurn = false, isGameOver = false, isObserver = false, wasPlayerOne = false;
     int roomNumber;
-
     string[] turns;
-
-    const int three = 3;
-
     int turnCount = 0;
 
     public void SetTurnData(string[] data)
@@ -87,6 +81,11 @@ public class TTTGameManager : MonoBehaviour
         DrawCheck();
     }
 
+    //Set network connection param
+    public void SetNetworkConnection(NetworkedClient networkClient)
+    {
+        connectionToHost = networkClient;
+    }
     //Check if win
     void WinCheck(int checkingRow, int checkingCol)
     {
@@ -108,7 +107,7 @@ public class TTTGameManager : MonoBehaviour
                 diagonal2Count++;
         }
         //Check if a row OR collumn OR diagonal has 3 same symbol
-        if(rowCount == three || colCount == three || diagonal1Count == three || diagonal2Count == three)
+        if(rowCount == 3 || colCount == 3 || diagonal1Count == 3 || diagonal2Count == 3)
         {
             //Player win
             OnGameOver("You Won!");
@@ -122,9 +121,9 @@ public class TTTGameManager : MonoBehaviour
     private void DrawCheck()
     {
         int takenTileCount = 0;
-        foreach (TTTSquareScript s in TTTSquares)
+        foreach (TTTSquareScript square in TTTSquares)
         {
-            if (s.isSquareTaken)
+            if (square.isSquareTaken)
                 takenTileCount++;
         }
 
@@ -168,11 +167,7 @@ public class TTTGameManager : MonoBehaviour
         //Enable replay
         ChangeState(TicTacToeStates.GameOver);
     }
-    //Set network connection param
-    public void SetNetworkConnection(NetworkedClient networkClient)
-    {
-         connectionToHost = networkClient;
-    }
+
 
     //Symbol selection
     void XButtonPressed()
@@ -238,7 +233,7 @@ public class TTTGameManager : MonoBehaviour
     //Enter as observer
     public void EnterGameAsObserver(string[] csv_TurnsSoFar)
     {
-        ChangeState(TicTacToeStates.Observing);
+        ChangeState(TicTacToeStates.Observer);
 
         //Get current match's data
         foreach(string index in csv_TurnsSoFar)
@@ -299,26 +294,21 @@ public class TTTGameManager : MonoBehaviour
         nextButton.SetActive(false);
         previousButton.SetActive(false);
         //Game just started
-        if(state == TicTacToeStates.StartingGame)
+        if(state == TicTacToeStates.GameStart)
         {
             ResetGameState();
-           
             isGameOver = false;
-            
             SymbolSelectUI.SetActive(true);
-
             isObserver = false;
         }
         //Player is observer
-        else if(state == TicTacToeStates.Observing)
+        else if(state == TicTacToeStates.Observer)
         {
             ResetGameState();
             playerSymbol = "X";
             opponentSymbol = "O";
             SymbolSelectUI.SetActive(false);
-
             playerSymbolText.GetComponent<Text>().text = "You are an observer";
-
             isObserver = true;
         }
         //Game ended
@@ -337,7 +327,7 @@ public class TTTGameManager : MonoBehaviour
 
 public class TicTacToeStates
 {
-    public const int StartingGame = 1;
-    public const int Observing = 2;
+    public const int GameStart = 1;
+    public const int Observer = 2;
     public const int GameOver = 3;
 }

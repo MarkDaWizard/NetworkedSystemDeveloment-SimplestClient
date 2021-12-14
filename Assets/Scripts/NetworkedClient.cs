@@ -141,7 +141,7 @@ public class NetworkedClient : MonoBehaviour
         else if(signifier == ServerToClientSignifiers.GameStart)
         {
             gameSystemManager.GetComponent<SystemManager>().ChangeState(GameStates.TicTacToe);
-            ticTacToeManager.GetComponent<TTTGameManager>().ChangeState(TicTacToeStates.StartingGame);
+            ticTacToeManager.GetComponent<TTTGameManager>().ChangeState(TicTacToeStates.GameStart);
             ticTacToeManager.GetComponent<TTTGameManager>().SetRoomNumberText(csv[1]);
         }
         //Check if player is going first
